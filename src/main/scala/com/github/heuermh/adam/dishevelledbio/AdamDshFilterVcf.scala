@@ -73,6 +73,8 @@ class AdamDshFilterVcf(val args: AdamDshFilterVcfArgs) extends BDGSparkCommand[A
   override def run(sc: SparkContext): Unit = {
     val input: VariantContextRDD = sc.loadVcf(args.inputVcfFile)
 
+    log.warn("Loaded %d variant context records".format(input.rdd.count()))
+
     implicit val tFormatter = VCFInFormatter
     implicit val uFormatter = new VCFOutFormatter
 
@@ -86,6 +88,8 @@ class AdamDshFilterVcf(val args: AdamDshFilterVcfArgs) extends BDGSparkCommand[A
 
     val output: VariantContextRDD = input.pipe[VariantContext, VariantContextRDD, VCFInFormatter](dshFilterVcfCommand.toString)
       .transform(_.cache())
+
+    log.warn("Saving %d variant context records after filtering".format(output.rdd.count()))
 
     output.saveAsVcf(args.outputVcfFile, args.asSingleFile)
   }

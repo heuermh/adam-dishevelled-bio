@@ -17,6 +17,8 @@ To build
 ```bash
 $ spark-submit \
     --class com.github.heuermh.adam.dishevelledbio.AdamDshFilterVcf \
+    --conf spark.serializer=org.apache.spark.serializer.KryoSerializer \
+    --conf spark.kryo.registrator=org.bdgenomics.adam.serialization.ADAMKryoRegistrator \
     target/adam-dishevelled-bio_2.10-0.19.1-SNAPSHOT.jar \
     --id rs201888535 \
     --single \
