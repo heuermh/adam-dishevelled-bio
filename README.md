@@ -1,6 +1,6 @@
 # adam-dishevelled-bio
 
-###Hacking adam-dishevelled-bio
+### Hacking adam-dishevelled-bio
 
 Install
 
@@ -12,7 +12,7 @@ To build
 
     $ mvn install
 
-###Running adam-dishevelled-bio using `spark-submit`
+### Running adam-dishevelled-bio using `spark-submit`
 
 ```bash
 $ spark-submit \
